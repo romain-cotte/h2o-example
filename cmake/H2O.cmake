@@ -3,8 +3,8 @@
 message(STATUS "DEP_ROOT_DIR: ${DEP_ROOT_DIR}")
 
 
-# set(H2O_VERSION 6dda7d6f21610ecd5256543384fa4b4b345a88ac)
-set(H2O_VERSION 7359e98d78d018a35f5da7523feac69f64eddb4b)
+set(H2O_VERSION 6dda7d6f21610ecd5256543384fa4b4b345a88ac)
+# set(H2O_VERSION 7359e98d78d018a35f5da7523feac69f64eddb4b)
 set(H2O_NAME h2o-${H2O_VERSION})
 set(H2O_TAR_PATH ${DEP_ROOT_DIR}/${H2O_NAME}.tar.gz)
 
@@ -17,6 +17,8 @@ if(NOT EXISTS ${DEP_ROOT_DIR}/${H2O_NAME})
     message(STATUS "Extracting ${H2O_NAME}...")
     execute_process(COMMAND ${CMAKE_COMMAND} -E tar xzf ${H2O_TAR_PATH} WORKING_DIRECTORY ${DEP_ROOT_DIR}/)
 endif()
+
+message("Does the file ${DEP_ROOT_DIR}/${H2O_NAME}/build/libh2o-evloop.a exist?")
 
 if(NOT EXISTS ${DEP_ROOT_DIR}/${H2O_NAME}/build/libh2o-evloop.a)
     message("Configuring ${H2O_NAME}...")
@@ -37,9 +39,14 @@ if(NOT EXISTS ${DEP_ROOT_DIR}/${H2O_NAME}/build/libh2o-evloop.a)
             "-B${DEP_ROOT_DIR}/${H2O_NAME}/build"
             RESULT_VARIABLE
             H2O_CONFIGURE)
+
+    message(STATUS "H2O_CONFIGURE ${H2O_CONFIGURE}")
+
     if(NOT H2O_CONFIGURE EQUAL 0)
         message(FATAL_ERROR "${H2O_NAME} configure failed!")
     endif()
+
+    message(STATUS "BUILD_DEPS ${BUILD_DEPS}")
 
     if(BUILD_DEPS STREQUAL "yes")
         message("Building ${H2O_NAME} locally...")

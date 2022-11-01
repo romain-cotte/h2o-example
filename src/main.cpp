@@ -27,8 +27,6 @@
 #include <sys/socket.h>
 #include <sys/stat.h>
 
-#define H2O_USE_LIBUV 0
-
 extern "C" {
   #include "h2o.h"
   #include "h2o/http1.h"
