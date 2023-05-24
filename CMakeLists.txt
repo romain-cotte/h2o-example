@@ -16,6 +16,9 @@ if(USE_SANTINIZER)
   set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize-recover=all -fPIE")
 endif()
 
+
+add_definitions(-DH2O_USE_LIBUV=0)
+
 set(DEP_ROOT_DIR ${CMAKE_SOURCE_DIR}/external-${CMAKE_SYSTEM_NAME})
 
 

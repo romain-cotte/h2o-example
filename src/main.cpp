@@ -70,7 +70,7 @@ static int helloHandler(h2o_handler_t* handler, h2o_req_t* req) {
     NULL,
     H2O_STRLIT("text/plain")
   );
-  h2o_send_inline(req, H2O_STRLIT("Hello, world\n"));
+  h2o_send_inline(req, H2O_STRLIT("Hello, world. It works well.\n"));
 
   return 0;
 }
